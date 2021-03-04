@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:flutter_application_1/models/catalog.dart';
 import 'package:flutter_application_1/widgets/drawer.dart';
-import 'package:flutter_application_1/widgets/itemwidget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -40,11 +39,44 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-            ? ListView.builder(
-                itemCount: CatalogModel.items.length,
+            // ? ListView.builder(
+            //     itemCount: CatalogModel.items.length,
+            //     itemBuilder: (context, index) {
+            //       return ItemWidget(item: CatalogModel.items[index]);
+            //     })
+            ? GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                ),
                 itemBuilder: (context, index) {
-                  return ItemWidget(item: CatalogModel.items[index]);
-                })
+                  final item = CatalogModel.items[index];
+                  return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: GridTile(
+                      header: Container(
+                        child: Text(
+                          item.name,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                        ),
+                      ),
+                      footer: Text(item.price.toString()),
+                      child: Image(image: NetworkImage(item.image)),
+                    ),
+                  );
+                },
+                itemCount: CatalogModel.items.length,
+              )
             : Center(
                 child: CircularProgressIndicator(),
               ),
