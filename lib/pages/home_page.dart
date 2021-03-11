@@ -25,22 +25,29 @@ class _HomePageState extends State<HomePage> {
     var decodedData = jsonDecode(catalogJson);
     print(catalogJson);
     print(decodedData);
+    CatalogModel.items = List.from(decodedData["products"])
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final tempList = List.generate(20, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: Text('Catalog App'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: ListView.builder(
-            itemCount: tempList.length,
-            itemBuilder: (context, index) {
-              return ItemWidget(item: tempList[index]);
-            }),
+        child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+            ? ListView.builder(
+                itemCount: CatalogModel.items.length,
+                itemBuilder: (context, index) {
+                  return ItemWidget(item: CatalogModel.items[index]);
+                })
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: MyDrawer(),
     );
