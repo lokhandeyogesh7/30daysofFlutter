@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Yolo\'s flutter App'),
+        title: Text('Catalog App'),
       ),
       body: Center(
         child: Container(
