@@ -7,7 +7,6 @@ import 'package:flutter_application_1/models/catalog.dart';
 import 'package:flutter_application_1/pages/home_widgets/catalog_header.dart';
 import 'package:flutter_application_1/pages/home_widgets/catalog_list.dart';
 import 'package:flutter_application_1/utils/MyRoutes.dart';
-import 'package:flutter_application_1/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,10 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final int days = 30;
-
-  final String name = "Codepur";
-
   @override
   void initState() {
     super.initState();
@@ -41,15 +36,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyThemes.creamColor,
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
-          backgroundColor: MyThemes.darkblueColor,
           child: Icon(CupertinoIcons.cart),
         ),
         body: SafeArea(
           child: Container(
-            padding: Vx.m32,
+            padding: Vx.m16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
