@@ -15,7 +15,7 @@ class CatalogList extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomeDetails(
+                        builder: (context) => HomeDetailPage(
                           catalog: catalog,
                         ),
                       ),
