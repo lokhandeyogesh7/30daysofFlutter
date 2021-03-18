@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/MyRoutes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -28,15 +29,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.white,
+        color: context.canvasColor,
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                SizedBox(
-                  height: 20.0,
-                ),
                 Image.asset(
                   "assets/images/login.png",
                   fit: BoxFit.cover,
@@ -47,8 +45,8 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   "Welcome $name",
                   style: TextStyle(
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    fontSize: 28.0,
                   ),
                 ),
                 SizedBox(
@@ -61,13 +59,14 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       TextFormField(
                         decoration: InputDecoration(
-                          hintText: "Enter Username",
+                          hintText: "Enter username",
                           labelText: "Username",
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
                             return "Username cannot be empty";
                           }
+
                           return null;
                         },
                         onChanged: (value) {
@@ -78,15 +77,16 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         obscureText: true,
                         decoration: InputDecoration(
-                          hintText: "Enter Password",
+                          hintText: "Enter password",
                           labelText: "Password",
                         ),
                         validator: (value) {
                           if (value.isEmpty) {
                             return "Password cannot be empty";
-                          } else if (value.length < 5) {
-                            return "Password length should be atleast 5";
+                          } else if (value.length < 6) {
+                            return "Password length should be atleast 6";
                           }
+
                           return null;
                         },
                       ),
@@ -94,28 +94,27 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40.0,
                       ),
                       Material(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(
-                          changeButton ? 40 : 8,
-                        ),
+                        color: context.theme.buttonColor,
+                        borderRadius:
+                            BorderRadius.circular(changeButton ? 50 : 8),
                         child: InkWell(
                           onTap: () => moveToHome(context),
                           child: AnimatedContainer(
-                            duration: Duration(
-                              seconds: 1,
-                            ),
-                            height: 40,
-                            width: changeButton ? 40 : 150,
+                            duration: Duration(seconds: 1),
+                            width: changeButton ? 50 : 150,
+                            height: 50,
                             alignment: Alignment.center,
                             child: changeButton
-                                ? Icon(Icons.done, color: Colors.white)
+                                ? Icon(
+                                    Icons.done,
+                                    color: Colors.white,
+                                  )
                                 : Text(
                                     "Login",
                                     style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
                                   ),
                           ),
                         ),
